@@ -46,7 +46,11 @@ sign-in is kept in your keychain and renewed on its own.
 The server needs one of:
 
 - dynamic client registration turned on (System Console > Integrations >
-  Integration Management; `ServiceSettings.EnableDynamicClientRegistration`);
+  Integration Management; `ServiceSettings.EnableDynamicClientRegistration`).
+  ackt registers itself to come back to `http://localhost:<port>/callback`,
+  so a server that limits where apps may come back to
+  (`ServiceSettings.DCRRedirectURIAllowlist`) needs a pattern like
+  `http://localhost:*/*`;
 - or an OAuth 2.0 app an admin registered with the callback URL
   `http://127.0.0.1:27065/callback`: set its client ID with
   `ackt plugin set mattermost work oauth_client_id=<id>`, and ackt asks for
