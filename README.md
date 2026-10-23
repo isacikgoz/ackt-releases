@@ -30,6 +30,22 @@ Optional, picked up when installed:
   API can judge instead: `ackt plugin add openai`.
 - [Ollama](https://ollama.com): memory embeds messages on your machine.
 
+## Desktop app (alpha)
+
+ackt in a window of its own, with how many things need you in the menu bar
+(macOS) or the tray (Linux). It brings ackt with it: the first launch
+installs it and runs it in the background, as the installer above does.
+Download it from the newest `desktop-v…` release on the
+[releases page](https://github.com/isacikgoz/ackt-releases/releases):
+
+- macOS, Apple Silicon: the `.dmg`, signed and notarized; drag ackt to
+  Applications and open it.
+- Debian and Ubuntu: `sudo apt install ./ackt_<version>_amd64.deb`.
+- Arch Linux: the `PKGBUILD`; `makepkg -si` in its folder.
+- Any Linux: the AppImage; `chmod +x`, then open it (it needs FUSE 3).
+
+*Uninstall ackt…* in its menu takes it off, keeping your messages or not.
+
 ## First run
 
 Run `ackt`. The plugins panel opens: pick Mattermost and sign in where it
