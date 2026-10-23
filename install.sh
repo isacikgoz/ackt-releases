@@ -104,13 +104,15 @@ trap 'rm -rf "$tmp"' EXIT INT TERM
 
 # Where the release is: ACKT_DOWNLOAD_URL, or the release on GitHub - the
 # newest, pre-releases included, unless ACKT_VERSION names one. GitHub's
-# own latest skips pre-releases, and every release so far is one.
+# own latest skips pre-releases, and every release so far is one. The
+# desktop app's releases (desktop-v…) hold the app, not this installer's
+# archives: the newest of the others.
 base=${ACKT_DOWNLOAD_URL:-}
 base=${base%/}
 if [ -z "$base" ]; then
 	if [ "$VERSION" = latest ]; then
-		fetch "https://api.github.com/repos/$REPO/releases?per_page=1" "$tmp/releases.json"
-		VERSION=$(sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p' "$tmp/releases.json" | head -n 1)
+		fetch "https://api.github.com/repos/$REPO/releases?per_page=30" "$tmp/releases.json"
+		VERSION=$(sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p' "$tmp/releases.json" | grep -v '^desktop-' | head -n 1)
 		[ -n "$VERSION" ] || fail "no release found at https://github.com/$REPO/releases"
 	fi
 	base=https://github.com/$REPO/releases/download/$VERSION
